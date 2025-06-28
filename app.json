@@ -11,17 +11,17 @@
     "buildpacks": [{
     "url": "heroku/python"
   }],
-  "repository": "https://github.com/tinaarobot/CHATBOT",
+  "repository": "",
   "env": {
     "API_ID": {
       "description": "Get this value from my.telegram.org/apps.",
       "required": true,
-      "value": "6435225"
+      "value": ""
     },
     "API_HASH": {
       "description": "Get this value from my.telegram.org/apps.",
       "required": true,
-      "value": "4e984ea35f854762dcde906dce426c2d"
+      "value": ""
     },
     "BOT_TOKEN": {
       "description": "A Bot token from @BotFather",
@@ -36,7 +36,7 @@
     "OWNER_ID": {
       "description": "User id of the user who will known as owner of the bot.",
       "required": true,
-      "value": "6922271843"
+      "value": ""
     }
   }
 }
