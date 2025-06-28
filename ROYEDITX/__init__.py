@@ -1,67 +1,15 @@
 import asyncio
-import importlib
-import logging
-import re
-import sys
-import time
+from ROYEDITX import LOGGER, LOCOPILOT
 
-from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
-from pyrogram import Client
+bot = LOCOPILOT()
 
-import config
-from ROYEDITX.modules import all_modules
+async def main():
+    await bot.start()
+    LOGGER.info("❖ ᴛʜᴇ sᴀᴛᴀɴ ᴄʜᴀᴛ ʙᴏᴛ sᴛᴀʀᴛᴇᴅ.")
+    await asyncio.Event().wait()
 
-logging.basicConfig(
-    format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
-    datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
-    level=logging.INFO,
-)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
-LOGGER = logging.getLogger(__name__)
-
-boot = time.time()
-mongo = MongoCli(config.MONGO_URL)
-db = mongo.Anonymous
-
-
-OWNER = config.OWNER_ID
-# DEVS = config.SUDO_USERS | config.OWNER_ID
-
-
-class LOCOPILOT(Client):
-    def __init__(self):
-        super().__init__(
-            name="LOCOPILOT",
-            api_id=config.API_ID,
-            api_hash=config.API_HASH,
-            bot_token=config.BOT_TOKEN,
-            plugins=dict(root="ROYEDITX.modules"),
-        )
-
-    async def start(self):
-        await super().start()
-        get_me = await self.get_me()
-        self.id = get_me.id
-        self.name = get_me.mention
-        self.username = get_me.username
-
-    async def stop(self):
-        await super().stop()
-
-
-dev = Client(
-    "Dev",
-    bot_token=config.BOT_TOKEN,
-    api_id=config.API_ID,
-    api_hash=config.API_HASH,
-)
-
-dev.start()
-
-BOT_ID = config.BOT_TOKEN.split(":")[0]
-x = dev.get_me()
-BOT_NAME = x.first_name + (x.last_name or "")
-BOT_USERNAME = x.username
-BOT_MENTION = x.mention
-BOT_DC_ID = x.dc_id
+if name == "main":
+    try:
+        asyncio.run(main())
+    except (KeyboardInterrupt, SystemExit):
+        LOGGER.info("Bot stopped by user.")
